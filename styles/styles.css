@@ -1,0 +1,970 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #1d1d1d;
+    color: white;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #333;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.header-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+header {
+    background-color: #444;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+header input {
+    padding: 10px;
+    width: calc(100% - 40px);
+    max-width: 600px;
+    border-radius: 5px;
+    border: none;
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+
+.forum-card {
+    background-color: #333;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.forum-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.forum-info h2 {
+    color: #00B13C; /* Asumiendo que quieres mantener el esquema de color */
+}
+
+.forum-info p {
+    color: white;
+    margin: 10px 0;
+}
+
+
+.enter-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #00B13C;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.enter-btn:hover {
+    background-color: #019231;
+}
+
+/* Sidebar and other styles */
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.logo-text {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.user-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.user-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.username {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.user-role {
+    font-size: 0.9em;
+    color: #999;
+}
+
+button.config, button.logout {
+    background-color: transparent;
+    border: none;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button.config:hover {
+    background-color: #019231;
+}
+
+button.logout:hover {
+    background-color: #c90028;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    margin: 10px 0;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: #575757;
+}
+
+.alerts-container, .info-container {
+    margin-top: 20px;
+}
+
+.alerts-title {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.alert {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.alert img {
+    width: 20px;
+    height: 20px;
+}
+
+.info-container .info {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.premium {
+    margin-top: 20px;
+}
+
+.premium button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #019231;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.premium button:hover {
+    background-color: #00B13C;
+}
+
+.form-container {
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
+    color: white;
+}
+
+.form-container h2 {
+    margin-top: 0;
+    color: #00B13C;
+}
+
+.form-container label {
+    display: block;
+    margin-bottom: 5px;
+    color: #bbb;
+}
+
+.form-container input[type="text"],
+.form-container textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #444;
+    color: white;
+}
+
+.form-container textarea {
+    height: 150px;
+    resize: vertical;
+}
+
+.form-container button {
+    background-color: #00c853;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.form-container button:hover {
+    background-color: #00B13C;
+}
+
+.question {
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
+    color: white;
+}
+
+.question h2 {
+    margin-top: 0;
+    color: #00B13C;
+}
+
+.responses {
+    margin-top: 20px;
+}
+
+.responses h3 {
+    color: #00B13C;
+    margin-bottom: 10px;
+}
+
+.response-item {
+    background-color: #444;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.response-item p {
+    margin: 0;
+    color: #bbb;
+}
+
+.response-item p strong {
+    color: #00c853;
+}
+
+.new-response {
+    margin-top: 20px;
+}
+
+.new-response h3 {
+    color: #00B13C;
+    margin-bottom: 10px;
+}
+
+.new-response textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #444;
+    color: white;
+    resize: vertical;
+    height: 100px;
+}
+
+.new-response button {
+    background-color: #00c853;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.new-response button:hover {
+    background-color: #00B13C;
+}
+
+/* Encabezado */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+header input[type="text"] {
+    flex: 1;
+    padding: 10px;
+    margin-right: 20px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+}
+
+header button {
+    background-color: #00c853;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+
+header .user-info {
+    display: flex;
+    align-items: center;
+}
+
+header .user-info .username {
+    margin-right: 10px;
+}
+
+/* Contenido principal */
+.dashboard {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* Estilos para los enlaces de los cursos */
+.subjects {
+    background-color: #2c2c2c;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.subject-item {
+    background-color: #4444448d; /* Un tono cálido y suave similar al color de la fotografía */
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.subject-item:hover {
+    background-color: #1d1d1d;
+}
+
+.subject-item h3 {
+    margin: 0;
+    font-size: 18px;
+    color: white;
+}
+
+.subject-item p {
+    margin: 5px 0 0;
+    font-size: 14px;
+    color: white;
+}
+
+
+/* Contenedor de elementos */
+.calendar,
+.notes,
+.alerts {
+    background-color: #2c2c2c;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Títulos de sección */
+.calendar h2,
+.notes h2,
+.alerts h2 {
+    margin-top: 0;
+    font-size: 24px;
+    border-bottom: 1px solid #444;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+/* Botones de editar y eliminar */
+.edit-alert-button,
+.delete-alert-button,
+.edit-note-button,
+.delete-note-button {
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-left: 10px;
+    font-size: 14px;
+}
+
+.edit-alert-button,
+.edit-note-button {
+    background-color: #4caf50; /* Verde para editar */
+    color: white;
+}
+
+.delete-alert-button,
+.delete-note-button {
+    background-color: #f44336; /* Rojo para eliminar */
+    color: white;
+}
+
+
+.calendar, .notes, .alerts {
+    background-color: #2c2c2c;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.calendar h2, .notes h2, .subjects h2, .alerts h2 {
+    margin-top: 0;
+    font-size: 24px;
+    border-bottom: 1px solid #444;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+
+/* Botones de agregar y guardar notas */
+.add-note-button, .save-note-button {
+    background-color: #00B13C;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-right: 10px; /* Espacio entre botones */
+}
+
+/* Botón de eliminar nota */
+.delete-note-button {
+    background-color: #c90028;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Elementos de alerta */
+.alert-item {
+    background-color: #4444448d;
+    padding: 5px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 800px; /* Ajusta el ancho máximo según sea necesario */
+}
+
+/* Botones de editar y eliminar alertas */
+.edit-alert-button, .delete-alert-button {
+    background-color: #00B13C;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    margin-right: 10px; /* Espacio entre botones */
+}
+
+.edit-alert-button:hover {
+    background-color: #019231;
+}
+
+.delete-alert-button:hover {
+    background-color: #DC143C;
+}
+
+.delete-alert-button {
+    background-color: #c90028;
+}
+
+
+
+/* Icono de calendario */
+.calendar-icon {
+    font-size: 1.2em;
+    margin-left: 5px;
+}
+
+.chat-title {
+    background-color: #333; /* Color de fondo para el título */
+    padding: 10px; /* Relleno alrededor del título */
+    text-align: center; /* Centrar el título */
+}
+
+.chat-title h2 {
+    color: white; /* Color del texto del título */
+    margin: 0; /* Eliminar el margen por defecto del título */
+}
+
+/* Estilos para el encabezado del chat */
+.chat-header {
+    background-color: #444;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.chat-header input {
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+}
+
+/* Estilos para los mensajes del chat */
+.chat-messages {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.message {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.message-content {
+    background-color: #333;
+    border-radius: 10px;
+    padding: 10px;
+    max-width: 80%;
+    margin-left: 5%;
+}
+
+.timestamp {
+    display: block;
+    text-align: right;
+    color: #999;
+    margin-top: 5px;
+}
+
+/* Estilos para el área de entrada del chat */
+.chat-input {
+    display: flex;
+    padding: 10px;
+    background-color: #333;
+}
+
+.chat-input input {
+    flex-grow: 1;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    margin-right: 10px;
+}
+
+.chat-input button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: #00B13C;
+    color: white;
+    cursor: pointer;
+}
+
+.profile-form-container {
+    background-color: #333;
+    padding: 30px; /* Incrementar el padding para mayor espacio interior */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: white;
+    margin-top: 40px; /* Mayor margen superior para separar del encabezado */
+    max-width: 600px; /* Ajustar el ancho máximo */
+    width: 90%; /* Asegurar que ocupe el 90% del contenedor padre */
+    margin-left: auto;
+    margin-right: auto; /* Centrar el formulario horizontalmente */
+}
+
+.profile-form-container h2 {
+    margin-top: 0;
+    color: #00B13C;
+    text-align: center;
+    margin-bottom: 20px; /* Añadir margen inferior para separación del contenido */
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #bbb;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #444;
+    color: white;
+}
+
+.save-button {
+    background-color: #00c853;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    display: block;
+    width: 100%;
+}
+
+.save-button:hover {
+    background-color: #00B13C;
+}
+
+/* Estilos para los elementos del foro */
+.question-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Organizar en dos columnas */
+    gap: 20px;
+}
+
+.question-item {
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: white;
+    width: 100%; /* Asegurar que los elementos ocupen el ancho completo */
+    margin-top: 20px; /* Agregar margen superior */
+}
+
+/* Estilos para la lista de hilos */
+.question-list {
+    display: flex; /* Cambiar a flexbox para organizar los elementos uno debajo del otro */
+    flex-direction: column; /* Organizar los elementos en una columna */
+}
+
+/* Estilos para los elementos individuales del foro */
+.question-item {
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: white;
+    margin-bottom: 10px; /* Agregar margen inferior entre los hilos */
+    width: 95%; /* Asegurar que los elementos ocupen el ancho completo */
+}
+
+.question-info {
+    margin-bottom: 20px;
+}
+
+.question-info h4 {
+    margin-top: 0;
+    color: #00B13C;
+    font-size: 1.2em;
+}
+
+.question-info p {
+    margin: 5px 0;
+    color: #999;
+}
+
+.enter-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #00B13C;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.enter-btn:hover {
+    background-color: #019231;
+}
+
+/* Estilos para la sección My Courses */
+.courses-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.courses-header {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.courses-header input {
+    padding: 10px;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 5px;
+    border: none;
+    background-color: #444;
+    color: white;
+}
+
+.course-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.course-card {
+    background-color: #444; /* Fondo gris claro */
+    border-radius: 10px;
+    padding: 20px;
+    width: 100%;
+    max-width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: white; /* Color de texto oscuro para contraste */
+}
+
+.course-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.course-info h2 {
+    margin-top: 0;
+    color: white; /* Color del título */
+}
+
+.course-info p {
+    margin: 10px 0;
+    color: #bbbbbb; /* Color del texto */
+}
+
+.course-block .enter-course-btn {
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.enter-course-btn:hover {
+    background-color: #019231;
+}
+
+.course-block button:hover,
+.course-block a:hover {
+    background-color: #019231;
+}
+
+/* Estilos para curso_calculo.html */
+
+.course-detail {
+    padding: 20px;
+}
+
+.course-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #444;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.course-img-large {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+.course-header h1 {
+    margin: 20px;
+    font-size: 2em;
+}
+
+.course-header p {
+    font-size: 1.2em;
+    margin-top: 10px;
+}
+
+.course-blocks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.course-block {
+    background-color: #444;
+    padding: 20px;
+    border-radius: 10px;
+    flex: 1 1 calc(25% - 20px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.course-block h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.course-block ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.course-block li {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.course-block li:last-child {
+    border-bottom: none;
+}
+
+.course-block a {
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.course-block a:hover {
+    text-decoration: underline;
+}
+
+.course-block p {
+    margin: 0 0 10px 0;
+}
+
+.enter-course-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #008a2a;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.enter-course-btn:hover {
+    background-color: #008a2a;
+}
+
+.course-block button {
+    background-color: #008a2a;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+}
+
+.course-block button:hover {
+    background-color: #008a2a;
+}
