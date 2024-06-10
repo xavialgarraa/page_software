@@ -20,53 +20,31 @@ const analytics = getAnalytics(app);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-// Seleccionar elementos del DOM
-const chatInput = document.querySelector('.chat-input input');
-const chatMessages = document.querySelector('.chat-messages');
+const responsesContainer = document.getElementById('responses-container');
 
 // Función para agregar un mensaje al chat
-function addMessage(message, sender, username, messageTime) {
-    const messageElement = document.createElement('div');
-    messageElement.classList.add('message');
+function addMessage(message, username, messageTime) {
+    if (username && message) { // Verificar si el usuario y el mensaje no están vacíos
+        const messageElement = document.createElement('div');
+        messageElement.classList.add('response-item');
 
-    const avatarContainer = document.createElement('div');
-    avatarContainer.classList.add('avatar-container');
+        const messageContent = document.createElement('p');
+        messageContent.innerHTML = `<strong>${username}:</strong> ${message}`;
 
-    const avatar = document.createElement('img');
-    avatar.src = sender === 'user' ? 'pictures/student.png' : 'pictures/logo.png';
-    avatar.alt = 'Avatar';
-    avatar.classList.add('user-avatar');
+        const messageTimestamp = document.createElement('p');
+        messageTimestamp.textContent = `${messageTime}`;
 
-    // Agregar el nombre de usuario debajo del avatar
-    const usernameElement = document.createElement('div');
-    usernameElement.textContent = username;
-    usernameElement.classList.add('username');
+        messageElement.appendChild(messageContent);
+        messageElement.appendChild(messageTimestamp);
 
-    avatarContainer.appendChild(avatar);
-    avatarContainer.appendChild(usernameElement);
-
-    const messageContent = document.createElement('div');
-    messageContent.classList.add('message-content');
-    messageContent.innerHTML = `<p>${message}</p><span class="timestamp">${messageTime}</span>`;
-
-    messageElement.appendChild(avatarContainer);
-    messageElement.appendChild(messageContent);
-
-    chatMessages.appendChild(messageElement);
+        responsesContainer.appendChild(messageElement); // Agregar mensaje al contenedor de respuestas
+    }
 }
 
-
-// Función para obtener la hora actual en formato HH:MM
-function getCurrentTime() {
-    const now = new Date();
-    const hours = now.getHours().toString().padStart(2, '0');
-    const minutes = now.getMinutes().toString().padStart(2, '0');
-    return `${hours}:${minutes}`;
-}
 
 // Función para cargar los mensajes desde Firestore
 async function loadMessages() {
-    const q = query(collection(db, "chats"), orderBy("date"));
+    const q = query(collection(db, "message_foro"), orderBy("date"));
     const querySnapshot = await getDocs(q);
 
     querySnapshot.forEach((doc) => {
@@ -74,19 +52,20 @@ async function loadMessages() {
             const messageData = doc.data();
             const messageTime = messageData.date.toDate(); // Convertir la fecha de Firebase a objeto Date
             const messageTimeString = messageTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); // Formatear la hora a HH:MM
-            const messageContent = messageData.mensaje; // Concatenar el mensaje y la hora
-            addMessage(messageContent, 'user', messageData.user, messageTimeString);
+            const messageContent = messageData.message; // Concatenar el mensaje y la hora
+            addMessage(messageContent, messageData.user, messageTimeString);
         } else {
             console.log("No such document!");
         }
     });
 }
 
+// Función para enviar una respuesta
+async function sendResponse() {
+    const responseInput = document.getElementById('response-input');
+    const responseMessage = responseInput.value.trim();
 
-// Función para enviar un mensaje
-async function sendMessage() {
-    const message = chatInput.value.trim();
-    if (message !== '') {
+    if (responseMessage !== '') {
         const timestamp = new Date(); // Obtener el momento exacto
 
         // Obtener el usuario actual
@@ -107,9 +86,9 @@ async function sendMessage() {
             });
 
             if (nickname) {
-                // Guardar el mensaje en la base de datos
-                await addDoc(collection(db, "chats"), {
-                    mensaje: message,
+                // Guardar la respuesta en la base de datos
+                await addDoc(collection(db, "message_foro"), {
+                    message: responseMessage,
                     user: nickname,
                     date: timestamp
                 });
@@ -119,10 +98,11 @@ async function sendMessage() {
                 const minutes = timestamp.getMinutes().toString().padStart(2, '0');
                 const messageTime = `${hours}:${minutes}`;
 
-                // Imprimir el mensaje en el chat
-                addMessage(message, 'user', nickname, messageTime);
+                // Agregar la respuesta al contenedor de respuestas
+                addMessage(responseMessage, nickname, messageTime);
 
-                chatInput.value = ''; // Limpiar el campo de entrada después de enviar el mensaje
+                // Limpiar el campo de entrada después de enviar la respuesta
+                responseInput.value = '';
             } else {
                 console.log("Nickname not found!");
             }
@@ -132,17 +112,9 @@ async function sendMessage() {
     }
 }
 
+// Event listener para enviar una respuesta cuando se hace clic en el botón "Submit Response"
+document.getElementById('submit-response-btn').addEventListener('click', sendResponse);
 
-
-// Event listener para enviar un mensaje cuando se presiona Enter
-chatInput.addEventListener('keypress', (event) => {
-    if (event.key === 'Enter') {
-        sendMessage();
-    }
-});
-
-// Event listener para enviar un mensaje cuando se hace clic en el botón de enviar
-document.querySelector('.chat-input button').addEventListener('click', sendMessage);
 
 // Escuchar cambios en la autenticación del usuario
 onAuthStateChanged(auth, (user) => {
