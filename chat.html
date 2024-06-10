@@ -1,145 +1,86 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UniHelp Chat</title>
-    <link rel="stylesheet" href="main_page.css">
-    <style>
-        /* Estilos adicionales para el chat */
-        .container {
-            display: flex;
-            height: 100vh;
-        }
-        .sidebar {
-            width: 200px;
-            background-color: black;
-            padding: 20px;
-        }
-        .main-content {
-            flex: 1;
-            padding: 20px;
-            overflow-y: auto;
-        }
-        .chat-container {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end; /* Alinea los mensajes a la derecha */
-        }
-        .message {
-            background-color: white; /* Cambiado a blanco */
-            color: black; /* Cambiado a negro */
-            padding: 10px;
-            margin: 10px;
-            border-radius: 10px;
-            max-width: 70%;
-        }
-        .user-message {
-            background-color: #4CAF50;
-            color: white;
-            position: relative;
-            padding-left: 60px; /* Espacio para la foto de perfil */
-        }
-        .message-sender {
-            position: absolute;
-            top: 5px;
-            left: 5px;
-            font-size: 14px;
-        }
-        .message-sender span {
-            font-weight: bold;
-            color: #333;
-        }
-        .message-sender img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%; /* Para hacerla redonda */
-            margin-right: 10px;
-        }
-        .input-container {
-            margin-top: 20px;
-            display: flex;
-            align-items: center;
-        }
-        .message-input {
-            flex: 1;
-            padding: 10px;
-            font-size: 16px;
-        }
-        .send-button {
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-left: 10px;
-        }
-    </style>
+    <title>UniHelp Forum - Calculus</title>
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script type="module" src="scripts/username.js" defer></script>
+    <script type="module" src="scripts/chat.js" defer></script>
+    <script defer src="scripts/logout.js"></script>
 </head>
 <body>
-    <div class="container">
-        <aside class="sidebar">
-            <div class="logo">UniHelp</div>
-            <nav>
-                <ul>
-                    <li><a href="main_page.html">Dashboard</a></li>
-                    <li><a href="mycourses.html">My Courses</a></li>
-                    <li><a href="foro.html">Forums</a></li>
-                    <li><a href="chat.html" class="nav-link">Chat</a></li>
-                    <li><a href="myprofile.html">My Profile</a></li>
-                </ul>
-            </nav>
-            <div class="premium">
-                <button>Activate Premium</button>
+<div class="container">
+    <aside class="sidebar">
+        <div class="logo-container">
+            <img src="pictures/logo.png" alt="Logo" class="logo-img">
+            <span class="logo-text">UniHelp</span>
+        </div>
+        <div class="user-container">
+            <img src="pictures/student.png" alt="User" class="user-img">
+            <div class="user-info">
+                <h1 id="username" class="username"></h1>
+                <span class="user-role">Student</span>
             </div>
-        </aside>
-        <main class="main-content">
-            <header>
-                <h1>Chat</h1>
-            </header>
-            <div class="chat-container">
-                <div class="message user-message">
-                    <div class="message-sender"><span>Juan</span></div>
-                    ¿Alguien puede ayudarme con una pregunta de Cálculo I?
-                </div>
+            <button class="config"><i class="fas fa-cog"></i></button>
+            <button class="logout"><i class="fas fa-sign-out-alt"></i></button>
+        </div>
+        <nav>
+            <span class="alerts-title">Content</span>
+            <ul>
+                <li><a href="dashbord.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="mycourses.html"><i class="fas fa-book"></i> My courses</a></li>
+                <li><a href="foro.html"><i class="fas fa-comments"></i> Forums</a></li>
+                <li><a href="chat.html" class="nav-link"><i class="fas fa-comment-alt"></i> Chat</a></li>
+                <li><a href="myprofile.html"><i class="fas fa-user"></i> My profile</a></li>
+            </ul>
+        </nav>
+        <div class="alerts-container">
+            <span class="alerts-title">Last Alerts</span>
+            <div class="alert">
+                <img src="pictures/alert.png" alt="Alert">
+                <span>Calculo</span>
             </div>
-            <div class="input-container">
-                <input type="text" class="message-input" placeholder="Escribe tu mensaje...">
-                <button class="send-button">Enviar</button>
+            <div class="alert">
+                <img src="pictures/alert.png" alt="Alert">
+                <span>Calculo</span>
             </div>
-        </main>
+        </div>
+        <div class="info-container">
+            <span class="alerts-title">Information</span>
+            <div class="info">
+                <span class="info-title">My doubts</span>
+                <span class="info-count">12</span>
+            </div>
+            <div class="info">
+                <span class="info-title">My forums</span>
+                <span class="info-count">5</span>
+            </div>
+        </div>
+        <div class="premium">
+            <button>Activate Premium</button>
+        </div>
+    </aside>
+    <div class="main-content">
+        <header>
+            <input type="text" class="chat-input-field" placeholder="Search...">
+        </header>
+        <!-- Main content - Chat structure -->
+        <div class="main-content">
+            <div class="chat-title">
+                <img src="pictures/logo.png" alt="Avatar" class="user-avatar">
+                <h2>Chat de Cálculo</h2>
+            </div>
+            <div class="chat-messages">
+                
+            </div>
+            <div class="chat-input">
+                <input type="text" class="chat-input-field" placeholder="Escribe algo...">
+                <button type="button" class="send-message-btn">Enviar</button>
+            </div>
+        </div>
     </div>
-
-    <script>
-        // Capturamos el input del mensaje y el botón de enviar
-        const messageInput = document.querySelector('.message-input');
-        const sendButton = document.querySelector('.send-button');
-
-        // Función para enviar un mensaje
-        function sendMessage() {
-            const messageText = messageInput.value.trim();
-            if (messageText !== '') {
-                const messageContainer = document.querySelector('.chat-container');
-                const newMessage = document.createElement('div');
-                newMessage.classList.add('message');
-                newMessage.textContent = messageText; // Añadido el texto del mensaje directamente
-                messageContainer.appendChild(newMessage);
-                messageInput.value = '';
-                // Auto-scroll para mantener el mensaje más reciente visible
-                messageContainer.scrollTop = messageContainer.scrollHeight;
-            }
-        }
-
-        // Event listener para enviar mensaje cuando se hace clic en el botón
-        sendButton.addEventListener('click', sendMessage);
-
-        // Event listener para enviar mensaje cuando se presiona Enter en el teclado
-        messageInput.addEventListener('keydown', function(event) {
-            if (event.key === 'Enter') {
-                sendMessage();
-            }
-        });
-    </script>
+</div>
 </body>
 </html>
